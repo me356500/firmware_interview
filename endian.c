@@ -16,5 +16,14 @@ int main() {
     printf("%x\n", *p);
     printf("%x\n", *(p + 1));
     printf("%x\n", *(p + 2));
+
+    unsigned char c[8] = {0x01, 0x23, 0x45, 0x67, 0x89, 0xAB, 0xCD, 0xEF};
+
+    unsigned int *ptr = &c;
+
+    printf("%x\n", *ptr);
+    printf("%x\n", *(ptr + 1));
+    printf("%x\n", *ptr + 1);
+
     return 0;
 }

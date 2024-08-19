@@ -16,7 +16,7 @@ void ptr2() {
     int arr[5] = {10,20,30,40,50};
 	int *ptr1 = arr;
 	int *ptr2 = arr + 5; 
-    int *ptr3 = &arr[0] + 1;
+    int *ptr3 = (int *)(&arr + 1);
     int *ptr4 = (ptr2 - 1);
 
 	printf("%d\n", (ptr2 - ptr1));
@@ -34,6 +34,29 @@ void ptr3(char **p)
     // [-1] --> "gh"
     t = (p+= sizeof(int))[-1];
     printf("%s",t); // gh
+}
+
+void ptr4() {
+    char s[] = "0113256";
+    char *p = s;
+    printf("%c",*p++);      // 先取值再把p指標位移
+    // 印0值不變再指到s[1]
+    printf("%c",*(p++));    // 等同*p++
+    // 印1值不變再指到s[2]
+    printf("%c",(*p)++);    // 先取值再把值+1
+    // 印1值變2一樣指到s[2]
+    printf("%c",*++p);      // p指標位移再取值
+    // 指到s[3]後取值
+    printf("%c",*(++p));    // 等同*++p
+    // 指到s[4]後取值
+    printf("%c",++*p);      // *p的值+1後取值
+    // s[4]值+1後取值
+    printf("%c",++(*p));    // 同 ++*p
+    // 再一次s[4]值+1後取值
+    printf("\n%s",s);
+    // **關鍵在於 p 和 ++ 碰在一起就是位移**
+    //-> 0113234
+    //-> 0123456
 }
 
 int main() {

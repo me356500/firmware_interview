@@ -14,21 +14,19 @@
 #define BITMASK_CHECK_ANY(x, mask) ((x) & (mask))
 
 int getnthbit(unsigned int n, int idx) {
-    // ith bit : idx - 1
-
-    return (n & (1 << (idx - 1)));
+    return (n & (1 << idx));
 }
 
 int setnthbit(unsigned int n, int idx) {
-    return (n | (1 << (idx - 1)));
+    return (n | (1 << idx));
 }
 
 int clearnthbit(unsigned int n, int idx) {
-    return (n & ~(1 << (idx - 1)));
+    return (n & ~(1 << idx));
 }
 
 int inversenthbit(unsigned int n, int idx) {
-    return (n ^ (1 << (idx - 1)));
+    return (n ^ (1 << idx));
 }
 
 int ispoweroftwo(unsigned int x) {
@@ -37,4 +35,28 @@ int ispoweroftwo(unsigned int x) {
 
 unsigned int odd_even_change(unsigned int a) {
     return ((a & 0xAAAAAAAA) >> 1) | ((a & 0x55555555) << 1);
+}
+
+int count_bit(unsigned int n) {
+    int ret = 0;
+
+    for (int i = 0; i < 32; ++i) {
+        if (n & (1 << i))
+            ++ret;
+    }
+
+    return ret;
+}
+
+int highest_bit(int n) {
+    int highest = 0;
+
+    for (int i = 31; ~i; --i) {
+        if ((n >> i) & 1) {
+            highest = i;
+            break;
+        }
+    }
+
+    return highest;
 }

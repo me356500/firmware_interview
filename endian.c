@@ -21,9 +21,10 @@ int main() {
 
     unsigned int *ptr = &c;
 
-    printf("%x\n", *ptr);
-    printf("%x\n", *(ptr + 1));
-    printf("%x\n", *ptr + 1);
+    // assume x86 little endian
+    printf("%x\n", *ptr);       // 67452301
+    printf("%x\n", *(ptr + 1)); // efcdab89
+    printf("%x\n", *ptr + 1);   // 67452302
 
     return 0;
 }

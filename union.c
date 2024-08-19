@@ -17,6 +17,11 @@ union union_test {
     int all;
 };
 
+union MyUnion {
+    int a[2];
+    char b[8];
+};
+
 int main() {
     union tmp1 a;
     a.b[0] = 10;
@@ -57,4 +62,20 @@ int main() {
      */
 
     printf("%x\n", u1.all);
+
+    MyUnion temp;
+    temp.a[0] = 3406;
+	// 3406 --> 0x00000d4e
+    /**
+     * High address
+     * 
+     * 00      b[3]
+     * 00      b[2]
+     * 04  --> b[1]
+     * 4e      b[0] 
+     * 
+     * Low address
+     */
+	
+    printf("%x\n%x", temp.b[0], temp.b[1]);
 }

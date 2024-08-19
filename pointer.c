@@ -13,16 +13,27 @@ void write_pointer() {
 }
 
 void ptr2() {
-    int arr[] = {10,20,30,40,50};
+    int arr[5] = {10,20,30,40,50};
 	int *ptr1 = arr;
 	int *ptr2 = arr + 5; 
-    int *ptr3 = &arr + 1;
-    int *ptr4 = *(ptr2 - 1);
+    int *ptr3 = &arr[0] + 1;
+    int *ptr4 = (ptr2 - 1);
 
 	printf("%d\n", (ptr2 - ptr1));
 	printf("%d\n", (char*)ptr2 - (char*)ptr1);
     printf("%d\n", ptr3 - ptr2);
     printf("%d\n", ptr4);
+}
+
+
+void ptr3(char **p)
+{
+    char *t;
+    // {"ab", "cd", "ef", "gh", "ij", "kl"};
+    // (p+= sizeof(int)) --> "ij"
+    // [-1] --> "gh"
+    t = (p+= sizeof(int))[-1];
+    printf("%s",t); // gh
 }
 
 int main() {
@@ -42,4 +53,8 @@ int main() {
     printf("\n%d", e);  
     printf(", %d \n", f); 
     ptr2();
+
+    // appendix 2.
+    char *argv[] = {"ab", "cd", "ef", "gh", "ij", "kl"};
+    ptr3(argv);
 }

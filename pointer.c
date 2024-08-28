@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdint.h>
 
 void write(int* a, int* b) {
     a = b;
@@ -59,12 +60,21 @@ void ptr4() {
     //-> 0123456
 }
 
+void ptr5() {
+    uint32_t *a = 0x12345678;
+    uint64_t *p1 = (uint64_t *)&a;
+    uint32_t *p2 = (uint32_t *)&a;
+    uint8_t *p3 = (uint8_t *)&a;
+
+    printf("\na : %x, p1 : %x, p2 : %x, p3 : %x\n", &a, p1 + 1, p2 + 1, p3 + 1);
+}
+
 int main() {
    int a[] = {1,2,3,4,5,6};
     int *p = a;
     *(p++) += 100;
     *(++p) += 100;
-    for(int i = 0; i<6 ; i++)
+    for (int i = 0; i < 6; i++)
         printf("%d ", a[i]);    
 
     // appendix
@@ -80,4 +90,6 @@ int main() {
     // appendix 2.
     char *argv[] = {"ab", "cd", "ef", "gh", "ij", "kl"};
     ptr3(argv);
+    ptr4();
+    ptr5();
 }

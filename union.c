@@ -5,6 +5,11 @@ union tmp1 {
     char b[2];
 };
 
+union tmp2 {
+    char a[8];
+    long long b;
+};
+
 struct struct_test {
     char b4;
     char b3;
@@ -63,7 +68,7 @@ int main() {
 
     printf("%x\n", u1.all);
 
-    MyUnion temp;
+    union MyUnion temp;
     temp.a[0] = 3406;
 	// 3406 --> 0x00000d4e
     /**
@@ -71,11 +76,11 @@ int main() {
      * 
      * 00      b[3]
      * 00      b[2]
-     * 04  --> b[1]
+     * 0d  --> b[1]
      * 4e      b[0] 
      * 
      * Low address
      */
 	
-    printf("%x\n%x", temp.b[0], temp.b[1]);
+    printf("%x\n%x\n", temp.b[0], temp.b[1]);
 }

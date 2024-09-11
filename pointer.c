@@ -10,7 +10,7 @@ void write_pointer() {
     int i = 0, j = 1;
 
     write(&i, &j);
-    printf("%d %d\n", i, j);
+    printf("%d %d\n", i, j); // 0 2
 }
 
 void ptr2() {
@@ -19,11 +19,15 @@ void ptr2() {
 	int *ptr2 = arr + 5; 
     int *ptr3 = (int *)(&arr + 1);
     int *ptr4 = (ptr2 - 1);
+    /**
+     *   10, 20, 30, 40, 50, 0
+     *   p1              p4 p2
+     */
 
-	printf("%d\n", (ptr2 - ptr1));
-	printf("%d\n", (char*)ptr2 - (char*)ptr1);
-    printf("%d\n", ptr3 - ptr2);
-    printf("%d\n", ptr4);
+	printf("%d\n", (ptr2 - ptr1)); // 5
+	printf("%d\n", (char*)ptr2 - (char*)ptr1); // 20
+    printf("%d\n", ptr3 - ptr2); // 0
+    printf("%d\n", *ptr4); // 50
 }
 
 
@@ -62,11 +66,19 @@ void ptr4() {
 
 void ptr5() {
     uint32_t *a = 0x12345678;
-    uint64_t *p1 = (uint64_t *)&a;
-    uint32_t *p2 = (uint32_t *)&a;
-    uint8_t *p3 = (uint8_t *)&a;
+    // move pointer size
+    uint64_t *p1 = (uint64_t *)&a; // + 8
+    uint32_t *p2 = (uint32_t *)&a; // + 4
+    uint8_t *p3 = (uint8_t *)&a; // + 1
+
+    uint32_t b = 0x12345678;
+    uint64_t *p4 = (uint64_t *)&b;
+    uint32_t *p5 = (uint32_t *)&b;
+    uint8_t *p6 = (uint8_t *)&b;
 
     printf("\na : %x, p1 : %x, p2 : %x, p3 : %x\n", &a, p1 + 1, p2 + 1, p3 + 1);
+
+    printf("\nb : %x, p4 : %x, p5 : %x, p6 : %x\n", b, *p4, *p5, *p6);
 }
 
 int main() {
@@ -82,7 +94,8 @@ int main() {
     int *p3 = a;
     int e = (*p2)++; 
     int f = ++*p3;
-
+    printf("\n");
+    write_pointer();
     printf("\n%d", e);  
     printf(", %d \n", f); 
     ptr2();

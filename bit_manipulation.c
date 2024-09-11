@@ -60,3 +60,8 @@ int highest_bit(int n) {
 
     return highest;
 }
+
+int abs(int a) {
+    int mask = a >> 31; // sign
+    return (a + mask) ^ mask;
+}
